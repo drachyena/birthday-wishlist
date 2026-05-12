@@ -17,7 +17,7 @@ export function WishlistPage({ wishes, summary }: WishlistPageProps) {
         <header className="pixel-card bg-[#fffdf4] p-6 sm:p-8">
           <div className="max-w-2xl space-y-4">
             <p className="sticker-label w-fit">Y2K BIRTHDAY BOARD</p>
-            <h1 className="text-4xl font-black leading-tight sm:text-6xl">
+            <h1 className="pixel-display text-4xl leading-tight sm:text-6xl">
               {wishlistTitle}
             </h1>
             <p className="text-base font-bold leading-7 text-[#5a3a6f] sm:text-lg">

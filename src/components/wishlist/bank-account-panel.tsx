@@ -64,7 +64,7 @@ export function BankAccountPanel() {
       <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
         <div className="space-y-2">
           <p className="sticker-label w-fit">ACCOUNT</p>
-          <h2 className="text-2xl font-black text-[#381a55]">
+          <h2 className="pixel-display text-2xl text-[#381a55]">
             계좌로 마음 보태기
           </h2>
           <p className="text-sm font-bold text-[#5a3a6f]">

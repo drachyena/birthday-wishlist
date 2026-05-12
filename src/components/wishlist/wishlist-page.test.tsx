@@ -28,9 +28,10 @@ describe("WishlistPage", () => {
   it("renders the personalized wishlist title", () => {
     render(<WishlistPage wishes={[wish]} summary={summary} />);
 
-    expect(
-      screen.getByRole("heading", { name: wishlistTitle }),
-    ).toBeInTheDocument();
+    const title = screen.getByRole("heading", { name: wishlistTitle });
+
+    expect(title).toBeInTheDocument();
+    expect(title).toHaveClass("pixel-display");
   });
 
   it("toggles one general message form above the wish cards", () => {

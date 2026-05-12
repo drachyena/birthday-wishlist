@@ -55,7 +55,9 @@ export function WishCard({ wish }: WishCardProps) {
             <p className="sticker-label mb-3">
               {wish.priority === "top" ? "TOP WISH" : "CUTE PICK"}
             </p>
-            <h2 className="text-2xl font-black text-[#381a55]">{wish.name}</h2>
+            <h2 className="pixel-display text-2xl text-[#381a55]">
+              {wish.name}
+            </h2>
           </div>
           <span className="rounded border-2 border-[#381a55] bg-[#a8fff0] px-2 py-1 text-xs font-black text-[#381a55] shadow-[3px_3px_0_#381a55]">
             OPEN

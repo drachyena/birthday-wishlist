@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Moneygraphy Pixel";
+  src: url("/fonts/Moneygraphy-Pixel.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 :root {
   --background: #fff7fc;
   --foreground: #381a55;
@@ -25,6 +33,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.pixel-display {
+  font-family: "Moneygraphy Pixel", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 button,
@@ -57,8 +71,9 @@ textarea {
   background: #ffef62;
   padding: 0.35rem 0.65rem;
   color: #381a55;
+  font-family: "Moneygraphy Pixel", Arial, Helvetica, sans-serif;
   font-size: 0.75rem;
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: 0;
   box-shadow: 3px 3px 0 #381a55;
 }

@@ -28,7 +28,7 @@ export function WishlistMessagePanel() {
       <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
         <div className="space-y-3">
           <p className="sticker-label w-fit">PRIVATE NOTE</p>
-          <h2 className="text-2xl font-black text-[#381a55]">
+          <h2 className="pixel-display text-2xl text-[#381a55]">
             마음만 남기기
           </h2>
           <p className="text-sm font-bold leading-6 text-[#5a3a6f]">
