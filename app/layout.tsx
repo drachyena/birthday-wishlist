@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { wishlistTitle } from "@/src/lib/profile";
+import { wishlistDescription, wishlistTitle } from "@/src/lib/profile";
 import { getSiteUrl } from "@/src/lib/site-url";
 import "./globals.css";
-
-const wishlistDescription = "귀여운 생일 위시를 함께 채워주세요.";
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),

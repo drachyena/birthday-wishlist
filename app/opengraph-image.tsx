@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { wishlistTitle } from "@/src/lib/profile";
+import { wishlistDescription, wishlistTitle } from "@/src/lib/profile";
 
 export const moneygraphyPixelFontName = "Moneygraphy Pixel";
 export const moneygraphyPixelFontPath = join(
@@ -11,6 +11,7 @@ export const moneygraphyPixelFontPath = join(
   "Moneygraphy-Pixel.otf",
 );
 export const alt = wishlistTitle;
+export const socialCardDescription = wishlistDescription;
 export const size = {
   width: 1200,
   height: 630,
@@ -143,7 +144,7 @@ export default async function OpenGraphImage() {
                 fontWeight: 400,
               }}
             >
-              귀여운 생일 위시를 함께 채워주세요.
+              {socialCardDescription}
             </div>
           </div>
         </div>
