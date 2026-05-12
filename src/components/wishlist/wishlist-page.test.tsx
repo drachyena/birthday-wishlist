@@ -23,6 +23,14 @@ const summary: WishlistSummary = {
 };
 
 describe("WishlistPage", () => {
+  it("renders the personalized wishlist title", () => {
+    render(<WishlistPage wishes={[wish]} summary={summary} />);
+
+    expect(
+      screen.getByRole("heading", { name: "@@의 생일 위시리스트" }),
+    ).toBeInTheDocument();
+  });
+
   it("toggles one general message form above the wish cards", () => {
     render(<WishlistPage wishes={[wish]} summary={summary} />);
 

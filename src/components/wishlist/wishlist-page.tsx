@@ -1,3 +1,4 @@
+import { wishlistTitle } from "@/src/lib/profile";
 import type { Wish, WishlistSummary } from "@/src/lib/wishes";
 import { ProgressMeter } from "./progress-meter";
 import { WishCard } from "./wish-card";
@@ -16,7 +17,7 @@ export function WishlistPage({ wishes, summary }: WishlistPageProps) {
           <div className="max-w-2xl space-y-4">
             <p className="sticker-label w-fit">Y2K BIRTHDAY BOARD</p>
             <h1 className="text-4xl font-black leading-tight sm:text-6xl">
-              Birthday Wishlist
+              {wishlistTitle}
             </h1>
             <p className="text-base font-bold leading-7 text-[#5a3a6f] sm:text-lg">
               생일에 살짝 마음을 얹어주고 싶은 고가 위시템들을 모아뒀어요.

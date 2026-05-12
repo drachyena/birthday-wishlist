@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { wishlistTitle } from "@/src/lib/profile";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Birthday Wishlist",
+  title: wishlistTitle,
   description: "A private birthday wishlist with cute wish funding progress.",
 };
 
