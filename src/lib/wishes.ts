@@ -10,6 +10,7 @@ export type Wish = {
   price: number;
   fundedAmount: number;
   image: string;
+  productUrl: string;
   priority: WishPriority;
   status: WishStatus;
 };

@@ -16,6 +16,7 @@ const sampleWishes: Wish[] = [
     price: 1000,
     fundedAmount: 250,
     image: "/wishes/open-a.jpg",
+    productUrl: "https://example.com/open-a",
     priority: "top",
     status: "open",
   },
@@ -26,6 +27,7 @@ const sampleWishes: Wish[] = [
     price: 3000,
     fundedAmount: 4500,
     image: "",
+    productUrl: "https://example.com/open-b",
     priority: "normal",
     status: "open",
   },
@@ -36,6 +38,7 @@ const sampleWishes: Wish[] = [
     price: 2000,
     fundedAmount: 2000,
     image: "/wishes/fulfilled-c.jpg",
+    productUrl: "https://example.com/fulfilled-c",
     priority: "normal",
     status: "fulfilled",
   },
@@ -73,7 +76,9 @@ describe("wish utilities", () => {
   });
 
   it("finds a wish by id from project data", () => {
-    expect(getWishById("designer-bag")?.name).toBe("Designer Bag");
+    expect(getWishById("nike-pegasus-42-womens")?.name).toBe(
+      "나이키 페가수스 42",
+    );
     expect(getWishById("missing")).toBeUndefined();
   });
 });

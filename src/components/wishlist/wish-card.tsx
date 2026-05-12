@@ -97,6 +97,15 @@ export function WishCard({ wish }: WishCardProps) {
 
         <ProgressMeter label="Item progress" percent={progress} />
 
+        <a
+          className="inline-flex w-full items-center justify-center rounded border-2 border-[#381a55] bg-[#a8fff0] px-4 py-3 text-sm font-black text-[#381a55] shadow-[3px_3px_0_#381a55] transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#381a55]"
+          href={wish.productUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          상품 보기
+        </a>
+
         <button
           className="pixel-button w-full"
           type="button"

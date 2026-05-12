@@ -10,6 +10,7 @@ const wish: Wish = {
   price: 3200000,
   fundedAmount: 850000,
   image: "",
+  productUrl: "https://example.com/designer-bag",
   priority: "top",
   status: "open",
 };
@@ -30,5 +31,14 @@ describe("WishCard", () => {
     render(<WishCard wish={wish} />);
 
     expect(screen.getByText("PIXEL WISH")).toBeInTheDocument();
+  });
+
+  it("links to the product page", () => {
+    render(<WishCard wish={wish} />);
+
+    expect(screen.getByRole("link", { name: "상품 보기" })).toHaveAttribute(
+      "href",
+      wish.productUrl,
+    );
   });
 });
