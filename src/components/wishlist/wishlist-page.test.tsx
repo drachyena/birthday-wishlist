@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { wishlistTitle } from "@/src/lib/profile";
 import type { Wish, WishlistSummary } from "@/src/lib/wishes";
 import { WishlistPage } from "./wishlist-page";
 
@@ -27,7 +28,7 @@ describe("WishlistPage", () => {
     render(<WishlistPage wishes={[wish]} summary={summary} />);
 
     expect(
-      screen.getByRole("heading", { name: "@@의 생일 위시리스트" }),
+      screen.getByRole("heading", { name: wishlistTitle }),
     ).toBeInTheDocument();
   });
 

@@ -1,5 +1,6 @@
-import { getWishById } from "@/src/lib/wishes";
 import { GENERAL_WISHLIST_MESSAGE_ID } from "@/src/lib/messages";
+import { insertBirthdayMessage } from "@/src/lib/supabase/server";
+import { getWishById } from "@/src/lib/wishes";
 
 type MessageRequestBody = {
   wishId?: unknown;
@@ -111,12 +112,35 @@ export async function POST(request: Request): Promise<Response> {
     );
   }
 
+  const storageResult = await insertBirthdayMessage(validation.data);
+
+  if (!storageResult.ok) {
+    if (storageResult.error === "STORAGE_NOT_CONNECTED") {
+      return jsonResponse(
+        {
+          ok: false,
+          error: "STORAGE_NOT_CONNECTED",
+          message: "아직 메시지 저장소가 연결되지 않았어요.",
+        },
+        503,
+      );
+    }
+
+    return jsonResponse(
+      {
+        ok: false,
+        error: "STORAGE_WRITE_FAILED",
+        message: "메시지를 저장하지 못했어요.",
+      },
+      500,
+    );
+  }
+
   return jsonResponse(
     {
-      ok: false,
-      error: "STORAGE_NOT_CONNECTED",
-      message: "아직 메시지 저장소가 연결되지 않았어요.",
+      ok: true,
+      message: "마음이 보태졌어요.",
     },
-    503,
+    201,
   );
 }
