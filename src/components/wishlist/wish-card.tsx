@@ -7,7 +7,6 @@ import {
   formatKrw,
   type Wish,
 } from "@/src/lib/wishes";
-import { MessageForm } from "./message-form";
 import { ProgressMeter } from "./progress-meter";
 
 type WishCardProps = {
@@ -18,7 +17,7 @@ function WishImageFallback() {
   return (
     <div className="grid aspect-[4/3] place-items-center border-b-4 border-[#381a55] bg-[#fff3a7] text-center">
       <div className="space-y-2">
-        <p className="text-xs font-black uppercase tracking-[0.25em] text-[#ff4fa3]">
+        <p className="text-xs font-black uppercase text-[#ff4fa3]">
           PIXEL WISH
         </p>
         <p className="text-4xl" aria-hidden="true">
@@ -31,27 +30,12 @@ function WishImageFallback() {
 }
 
 export function WishCard({ wish }: WishCardProps) {
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
-  const [showEffect, setShowEffect] = useState(false);
   const progress = calculateWishProgress(wish);
   const shouldShowImage = Boolean(wish.image) && !imageFailed;
 
-  function handleSubmitted() {
-    setShowEffect(true);
-    window.setTimeout(() => setShowEffect(false), 1600);
-  }
-
   return (
     <article className="pixel-card relative overflow-hidden bg-white">
-      {showEffect ? (
-        <div className="pixel-burst" aria-hidden="true">
-          <span>♥</span>
-          <span>●</span>
-          <span>♥</span>
-        </div>
-      ) : null}
-
       {shouldShowImage ? (
         <Image
           src={wish.image}
@@ -105,18 +89,6 @@ export function WishCard({ wish }: WishCardProps) {
         >
           상품 보기
         </a>
-
-        <button
-          className="pixel-button w-full"
-          type="button"
-          onClick={() => setIsFormOpen((current) => !current)}
-        >
-          마음만 보태기
-        </button>
-
-        {isFormOpen ? (
-          <MessageForm wishId={wish.id} onSubmitted={handleSubmitted} />
-        ) : null}
       </div>
     </article>
   );

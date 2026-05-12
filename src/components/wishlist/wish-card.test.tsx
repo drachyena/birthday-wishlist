@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { Wish } from "@/src/lib/wishes";
 import { WishCard } from "./wish-card";
@@ -16,15 +16,13 @@ const wish: Wish = {
 };
 
 describe("WishCard", () => {
-  it("opens the message form from the card action", () => {
+  it("does not render a per-card message action or form", () => {
     render(<WishCard wish={wish} />);
 
     expect(screen.queryByLabelText("닉네임")).not.toBeInTheDocument();
-
-    fireEvent.click(screen.getByRole("button", { name: "마음만 보태기" }));
-
-    expect(screen.getByLabelText("닉네임")).toBeInTheDocument();
-    expect(screen.getByLabelText("비공개 메시지")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "마음만 보태기" }),
+    ).not.toBeInTheDocument();
   });
 
   it("renders image fallback when the wish has no image", () => {

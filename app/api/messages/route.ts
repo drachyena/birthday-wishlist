@@ -1,4 +1,5 @@
 import { getWishById } from "@/src/lib/wishes";
+import { GENERAL_WISHLIST_MESSAGE_ID } from "@/src/lib/messages";
 
 type MessageRequestBody = {
   wishId?: unknown;
@@ -63,7 +64,7 @@ function validateMessageBody(
     };
   }
 
-  if (!getWishById(wishId)) {
+  if (wishId !== GENERAL_WISHLIST_MESSAGE_ID && !getWishById(wishId)) {
     return {
       ok: false,
       error: "UNKNOWN_WISH",

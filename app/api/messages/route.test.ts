@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { getOpenWishes } from "@/src/lib/wishes";
 import { POST } from "./route";
 
 function createJsonRequest(body: unknown): Request {
@@ -22,6 +23,8 @@ function createRawRequest(body: string): Request {
 }
 
 describe("POST /api/messages", () => {
+  const validWishId = getOpenWishes()[0].id;
+
   it("returns 400 for malformed JSON", async () => {
     const response = await POST(createRawRequest("{"));
     const payload = await response.json();
@@ -33,7 +36,7 @@ describe("POST /api/messages", () => {
   it("returns 400 for missing fields", async () => {
     const response = await POST(
       createJsonRequest({
-        wishId: "designer-bag",
+        wishId: validWishId,
         nickname: "",
         message: "",
       }),
@@ -59,10 +62,24 @@ describe("POST /api/messages", () => {
     expect(payload.error).toBe("UNKNOWN_WISH");
   });
 
+  it("returns 503 for the general wishlist message id", async () => {
+    const response = await POST(
+      createJsonRequest({
+        wishId: "wishlist",
+        nickname: "친구",
+        message: "생일 축하해!",
+      }),
+    );
+    const payload = await response.json();
+
+    expect(response.status).toBe(503);
+    expect(payload.error).toBe("STORAGE_NOT_CONNECTED");
+  });
+
   it("returns 503 for valid input while storage is disconnected", async () => {
     const response = await POST(
       createJsonRequest({
-        wishId: "designer-bag",
+        wishId: validWishId,
         nickname: "친구",
         message: "생일 축하해!",
       }),

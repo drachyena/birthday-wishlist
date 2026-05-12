@@ -2,9 +2,10 @@
 
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { GENERAL_WISHLIST_MESSAGE_ID } from "@/src/lib/messages";
 
 type MessageFormProps = {
-  wishId: string;
+  wishId?: string;
   onSubmitted?: () => void;
 };
 
@@ -32,6 +33,7 @@ export function MessageForm({ wishId, onSubmitted }: MessageFormProps) {
   const [message, setMessage] = useState("");
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [feedback, setFeedback] = useState("");
+  const resolvedWishId = wishId?.trim() || GENERAL_WISHLIST_MESSAGE_ID;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -61,7 +63,7 @@ export function MessageForm({ wishId, onSubmitted }: MessageFormProps) {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          wishId,
+          wishId: resolvedWishId,
           nickname: trimmedNickname,
           message: trimmedMessage,
         }),
