@@ -39,4 +39,17 @@ describe("WishCard", () => {
     expect(productLink).toHaveAttribute("href", wish.productUrl);
     expect(productLink).toHaveClass("inline-flex");
   });
+
+  it("shows a funding completed stamp when progress reaches 100 percent", () => {
+    render(
+      <WishCard
+        wish={{
+          ...wish,
+          fundedAmount: wish.price,
+        }}
+      />,
+    );
+
+    expect(screen.getByText("펀딩 완료")).toBeInTheDocument();
+  });
 });

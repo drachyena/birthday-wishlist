@@ -171,6 +171,35 @@ textarea {
   transition: width 240ms ease;
 }
 
+.funding-complete-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 253, 244, 0.68);
+}
+
+.funding-complete-stamp {
+  transform: rotate(-9deg);
+  border: 4px solid #ff2f91;
+  border-radius: 6px;
+  background: rgba(255, 253, 244, 0.82);
+  padding: 0.7rem 1rem;
+  color: #ff2f91;
+  font-family: "Moneygraphy Pixel", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.35rem, 6vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(255, 47, 145, 0.22),
+    5px 5px 0 #381a55;
+}
+
 .pixel-button {
   min-height: 3rem;
   border: 3px solid #381a55;

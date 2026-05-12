@@ -32,6 +32,7 @@ function WishImageFallback() {
 export function WishCard({ wish }: WishCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const progress = calculateWishProgress(wish);
+  const isCompleted = progress === 100;
   const shouldShowImage = Boolean(wish.image) && !imageFailed;
 
   return (
@@ -92,6 +93,12 @@ export function WishCard({ wish }: WishCardProps) {
           상품 보기
         </a>
       </div>
+
+      {isCompleted ? (
+        <div className="funding-complete-overlay">
+          <div className="funding-complete-stamp">펀딩 완료</div>
+        </div>
+      ) : null}
     </article>
   );
 }
