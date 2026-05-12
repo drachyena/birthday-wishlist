@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { wishlistTitle } from "@/src/lib/profile";
+import { vi } from "vitest";
+import { bankAccount, wishlistTitle } from "@/src/lib/profile";
 import type { Wish, WishlistSummary } from "@/src/lib/wishes";
 import { WishlistPage } from "./wishlist-page";
 
@@ -51,6 +52,67 @@ describe("WishlistPage", () => {
 
     expect(toggleButton).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByLabelText("닉네임")).not.toBeInTheDocument();
+  });
+
+  it("renders the bank account panel between the header and wish cards", () => {
+    render(<WishlistPage wishes={[wish]} summary={summary} />);
+
+    const header = screen.getByRole("banner");
+    const accountPanel = screen.getByRole("region", { name: "계좌 안내" });
+    const wishItems = screen.getByRole("region", {
+      name: "Birthday wish items",
+    });
+
+    expect(
+      header.compareDocumentPosition(accountPanel) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      accountPanel.compareDocumentPosition(wishItems) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "계좌번호 복사하기" }),
+    ).toBeInTheDocument();
+  });
+
+  it("copies the bank account number from the standalone account panel", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+
+    render(<WishlistPage wishes={[wish]} summary={summary} />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "계좌번호 복사하기" }),
+    );
+
+    expect(writeText).toHaveBeenCalledWith(bankAccount.accountNumber);
+    expect(await screen.findByText("복사됐어요!")).toBeInTheDocument();
+  });
+
+  it("falls back to a document copy command when clipboard access fails", async () => {
+    const writeText = vi.fn().mockRejectedValue(new Error("denied"));
+    const execCommand = vi.fn().mockReturnValue(true);
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+    Object.defineProperty(document, "execCommand", {
+      configurable: true,
+      value: execCommand,
+    });
+
+    render(<WishlistPage wishes={[wish]} summary={summary} />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "계좌번호 복사하기" }),
+    );
+
+    expect(await screen.findByText("복사됐어요!")).toBeInTheDocument();
+    expect(execCommand).toHaveBeenCalledWith("copy");
   });
 
   it("renders the total funding progress after the wish cards", () => {

@@ -1,5 +1,6 @@
 import { wishlistTitle } from "@/src/lib/profile";
 import type { Wish, WishlistSummary } from "@/src/lib/wishes";
+import { BankAccountPanel } from "./bank-account-panel";
 import { ProgressMeter } from "./progress-meter";
 import { WishCard } from "./wish-card";
 import { WishlistMessagePanel } from "./wishlist-message-panel";
@@ -27,6 +28,8 @@ export function WishlistPage({ wishes, summary }: WishlistPageProps) {
 
           <WishlistMessagePanel />
         </header>
+
+        <BankAccountPanel />
 
         <section
           className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
