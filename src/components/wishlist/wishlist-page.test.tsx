@@ -5,12 +5,14 @@ import { bankAccount, wishlistTitle } from "@/src/lib/profile";
 import type { Wish, WishlistSummary } from "@/src/lib/wishes";
 import { WishlistPage } from "./wishlist-page";
 
-vi.mock("sonner", () => ({
-  toast: {
+vi.mock("sonner", () => {
+  const toastMock = Object.assign(vi.fn(), {
     error: vi.fn(),
     success: vi.fn(),
-  },
-}));
+  });
+
+  return { toast: toastMock };
+});
 
 const wish: Wish = {
   id: "designer-bag",
@@ -153,5 +155,25 @@ describe("WishlistPage", () => {
       wishItems.compareDocumentPosition(totalProgress) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
+  });
+
+  it("shows a preparation toast from the create my page button below the summary", () => {
+    render(<WishlistPage wishes={[wish]} summary={summary} />);
+
+    const totalProgress = screen.getByRole("progressbar", {
+      name: "Wish funding progress",
+    });
+    const createMyPageButton = screen.getByRole("button", {
+      name: "내 페이지도 만들기",
+    });
+
+    expect(
+      totalProgress.compareDocumentPosition(createMyPageButton) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+
+    fireEvent.click(createMyPageButton);
+
+    expect(toast).toHaveBeenCalledWith("준비중입니다!");
   });
 });

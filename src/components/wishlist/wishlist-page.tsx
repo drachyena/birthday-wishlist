@@ -1,6 +1,7 @@
 import { wishlistTitle } from "@/src/lib/profile";
 import type { Wish, WishlistSummary } from "@/src/lib/wishes";
 import { BankAccountPanel } from "./bank-account-panel";
+import { CreateMyPageButton } from "./create-my-page-button";
 import { ProgressMeter } from "./progress-meter";
 import { WishCard } from "./wish-card";
 import { WishlistMessagePanel } from "./wishlist-message-panel";
@@ -60,6 +61,8 @@ export function WishlistPage({ wishes, summary }: WishlistPageProps) {
             </p>
           </div>
         </section>
+
+        <CreateMyPageButton />
       </section>
     </main>
   );
