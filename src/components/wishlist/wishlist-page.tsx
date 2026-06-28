@@ -61,8 +61,7 @@ export function WishlistPage({ wishes, summary }: WishlistPageProps) {
             </p>
           </div>
         </section>
-
-        <CreateMyPageButton />
+        
       </section>
     </main>
   );
